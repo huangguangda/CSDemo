@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="gbk"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <!-- ¶¨ÒåÒ»¸öÎÄ±¾¿ò£¬ËüÓÃÓÚ½ÓÊÕÓÃ»§µÄÊäÈë -->
+        <!-- å®šä¹‰ä¸€ä¸ªæ–‡æœ¬æ¡†ï¼Œå®ƒç”¨äºŽæŽ¥æ”¶ç”¨æˆ·çš„è¾“å…¥ -->
         <EditText
             android:id="@+id/input"
             android:layout_width="280dp"
@@ -21,7 +21,7 @@
             android:paddingLeft="8dp"
             android:text="@string/send"/>
     </LinearLayout>
-    <!-- ¶¨ÒåÒ»¸öÎÄ±¾¿ò£¬ËüÓÃÓÚÏÔÊ¾À´×Ô·þÎñÆ÷µÄÐÅÏ¢ -->
+    <!-- å®šä¹‰ä¸€ä¸ªæ–‡æœ¬æ¡†ï¼Œå®ƒç”¨äºŽæ˜¾ç¤ºæ¥è‡ªæœåŠ¡å™¨çš„ä¿¡æ¯ -->
     <TextView
         android:id="@+id/show"
         android:layout_width="match_parent"
