@@ -34,7 +34,7 @@ class ClientThread implements Runnable {
 
     public void run() {
         try {
-            s = new Socket("11111", 30000);
+            s = new Socket("196.168.15.2", 30000);
             br = new BufferedReader(new InputStreamReader(
                     s.getInputStream()));
             os = s.getOutputStream();
