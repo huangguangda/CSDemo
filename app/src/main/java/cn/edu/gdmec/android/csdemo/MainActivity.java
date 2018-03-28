@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity{
         input = findViewById(R.id.input);
         send = findViewById(R.id.send);
         show = findViewById(R.id.show);
-        handler = new Handler() // ②
-        {
+        handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 // 如果消息来自于子线程
