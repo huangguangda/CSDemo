@@ -1,56 +1,58 @@
 package cn.edu.gdmec.android.csdemo;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private LinearLayout view;
+public class MainActivity extends AppCompatActivity{
     private TextView show;
     private EditText input;
     private Button send;
+    private Handler handler;
     // 定义与服务器通信的子线程
+    private ClientThread clientThread;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-        submit();
-    }
-
-    private EditText getInput() {
-        return (EditText) findViewById(R.id.input);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.send:
-                break;
-        }
-    }
-
-    private void initView() {
-        view = findViewById(R.id.view);
         input = findViewById(R.id.input);
         send = findViewById(R.id.send);
         show = findViewById(R.id.show);
-        //send.setOnClickListener(this);
-    }
-
-    private void submit() {
-        // validate
-        String inputString = input.getText().toString().trim();
-        if (TextUtils.isEmpty(inputString)) {
-            Toast.makeText(this, "inputString不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        handler = new Handler() // ②
+        {
+            @Override
+            public void handleMessage(Message msg) {
+                // 如果消息来自于子线程
+                if (msg.what == 0x123) {
+                    // 将读取的内容追加显示在文本框中
+                    show.append("\n" + msg.obj.toString());
+                }
+            }
+        };
+        clientThread = new ClientThread(handler);
+        // 客户端启动ClientThread线程创建网络连接、读取来自服务器的数据
+        new Thread(clientThread).start(); // ①
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    // 当用户按下发送按钮后，将用户输入的数据封装成Message
+                    // 然后发送给子线程的Handler
+                    Message msg = new Message();
+                    msg.what = 0x234;
+                    msg.obj = input.getText().toString();
+                    clientThread.revHandler.sendMessage(msg);
+                    // 清空input文本框
+                    input.setText("");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
