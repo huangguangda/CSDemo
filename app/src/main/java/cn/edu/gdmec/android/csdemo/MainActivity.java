@@ -16,16 +16,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView show;
     private EditText input;
     private Button send;
+    // 定义与服务器通信的子线程
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-
-        view = (LinearLayout) findViewById(R.id.view);
-        findViewById(R.id.send).setOnClickListener(this);
-        show = (TextView) findViewById(R.id.show);
+        submit();
     }
 
     private EditText getInput() {
@@ -41,9 +39,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        input = (EditText) findViewById(R.id.input);
-        send = (Button) findViewById(R.id.send);
-        send.setOnClickListener(this);
+        view = findViewById(R.id.view);
+        input = findViewById(R.id.input);
+        send = findViewById(R.id.send);
+        show = findViewById(R.id.show);
+        //send.setOnClickListener(this);
     }
 
     private void submit() {
