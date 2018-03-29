@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
         };
         clientThread = new ClientThread(handler);
         // 客户端启动ClientThread线程创建网络连接、读取来自服务器的数据
-        new Thread(clientThread).start(); // ①
+        new Thread(clientThread).start();
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

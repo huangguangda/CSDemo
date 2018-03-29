@@ -34,7 +34,7 @@ class ClientThread implements Runnable {
 
     public void run() {
         try {
-            s = new Socket("196.168.15.2", 30000);
+            s = new Socket("10.10.248.116", 3000);
             br = new BufferedReader(new InputStreamReader(
                     s.getInputStream()));
             os = s.getOutputStream();
@@ -66,7 +66,7 @@ class ClientThread implements Runnable {
                 public void handleMessage(Message msg) {
                     // 接收到UI线程中用户输入的数据
                     if (msg.what == 0x234) {
-                        // 将用户在文本框内输入的内容写入网络
+                        // 将用户在文1本框内输入的内容写入网络
                         try {
                             os.write((msg.obj.toString() + "\r\n")
                                     .getBytes("utf-8"));
